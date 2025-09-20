@@ -36,6 +36,7 @@ func (cfg *apiConfig) handlerUploadThumbnail(w http.ResponseWriter, r *http.Requ
 
 	fmt.Println("uploading thumbnail for video", videoID, "by user", userID)
 	file, header, err := r.FormFile("thumbnail")
+	defer file.Close()
 	if err != nil {
 		respondWithError(w, 400, "too bad", err)
 		return
